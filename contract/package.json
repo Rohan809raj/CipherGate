@@ -1,0 +1,24 @@
+{
+  "name": "@ciphergate/contract",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./circuit": "./circuit.ts",
+    "./managed": "./src/managed/ciphergate/index.js",
+    "./managed/*": "./src/managed/*"
+  },
+  "scripts": {
+    "compact": "compact compile ciphergate.compact -o ./src/managed/ciphergate",
+    "build": "tsc"
+  },
+  "files": [
+    "ciphergate.compact",
+    "index.ts",
+    "circuit.ts",
+    "src/managed",
+    "managed"
+  ]
+}

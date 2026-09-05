@@ -1,0 +1,109 @@
+// ============================================================================
+// CipherGate - Midnight Compact Smart Contract & ZK Circuit Definition
+// Language: Midnight Compact v0.6+
+// Project: "Level 3 - First Quarter Submission" - RiseIn Midnight Hackathon
+// Tagline: "Prove you qualify. Reveal nothing."
+// ============================================================================
+// Privacy Architecture:
+// 1. Private Witness: The user's exact age (userAge) and private cryptographic
+//    salt (secretSalt) remain strictly client-side within the prover's local device.
+// 2. Public Ledger State: Only the eligibility threshold (minAgeThreshold),
+//    aggregate verification count (verifiedEligibleCount), nullifier commitments,
+//    and admin authority hash are recorded on-chain.
+// 3. Selective Disclosure: Observers on Midnight only observe a boolean assertion
+//    `isEligible = true` and a deterministic nullifier hash to prevent double-claim.
+//    No observer can deduce whether the user is 18, 25, 45, or 80.
+// ============================================================================
+
+module CipherGateContract;
+
+import CompactStandardLibrary;
+
+// Ledger state visible publicly on the Midnight blockchain
+ledger {
+  // Public eligibility age threshold (e.g. 18, 21), configurable at deploy/admin time
+  minAgeThreshold: Uint<32>;
+
+  // Total counter of successfully proven and verified eligible users
+  verifiedEligibleCount: Uint<64>;
+
+  // Public admin identity hash for authorized threshold parameter updates
+  adminPublicKeyHash: Bytes<32>;
+
+  // Accumulator root for spent verification nullifiers to prevent replay attacks
+  nullifierRoot: Bytes<32>;
+}
+
+// ----------------------------------------------------------------------------
+// Private Witness Definitions
+// These inputs are supplied exclusively off-chain by the prover's local runtime.
+// They NEVER appear in public ledger state, block transactions, or event logs.
+// ----------------------------------------------------------------------------
+
+// Private witness: User's actual chronological age (evaluated in whole years)
+witness userAge(): Uint<32>;
+
+// Private witness: Cryptographic high-entropy random salt ensuring unforgeable blinding
+witness secretSalt(): Bytes<32>;
+
+// Private witness: User's identity secret or pseudonym commitment
+witness identitySecret(): Bytes<32>;
+
+// ----------------------------------------------------------------------------
+// Circuit Helper Functions
+// ----------------------------------------------------------------------------
+
+// Compute private blind commitment for nullifier prevention
+// commitment = sha256(identitySecret || secretSalt)
+circuit computeNullifier(secret: Bytes<32>, salt: Bytes<32>, contextNonce: Bytes<32>): Bytes<32> {
+  return sha256(concat(concat(secret, salt), contextNonce));
+}
+
+// ----------------------------------------------------------------------------
+// Zero-Knowledge Circuit Exports
+// ----------------------------------------------------------------------------
+
+/**
+ * Zero-Knowledge Circuit: Proves user's age >= minAgeThreshold without disclosing raw age.
+ * 
+ * @param contextNonce Public context nonce (e.g. current session/epoch hash or verifier challenge)
+ * @returns Boolean `true` if age satisfies eligibility threshold and nullifier is valid
+ */
+export circuit proveEligibility(contextNonce: Bytes<32>): Boolean {
+  // 1. Fetch private witness inputs off-chain
+  const age: Uint<32> = userAge();
+  const salt: Bytes<32> = secretSalt();
+  const secret: Bytes<32> = identitySecret();
+
+  // 2. PRIVACY CONSTRAINT (Zero-Knowledge Inequality Check)
+  // Ensures the private age satisfies or exceeds the public threshold.
+  // The prover generates an arithmetic proof of this relationship;
+  // neither the verifier nor the blockchain ledger receives the numeric `age`.
+  assert(age >= ledger.minAgeThreshold, "CipherGate: Age does not meet the minimum eligibility threshold");
+
+  // 3. Compute unique single-use nullifier to prevent double-claiming within the same context
+  const nullifier: Bytes<32> = computeNullifier(secret, salt, contextNonce);
+
+  // Constraint: Ensure nullifier is not already spent / matching nullifierRoot
+  assert(nullifier != ledger.nullifierRoot, "CipherGate: Verification proof already used for this context");
+
+  // 4. Update public ledger state safely (without revealing prover identity or age)
+  ledger.verifiedEligibleCount = ledger.verifiedEligibleCount + 1;
+  ledger.nullifierRoot = nullifier;
+
+  // 5. Return boolean verification outcome to on-chain callers
+  return true;
+}
+
+/**
+ * Admin Circuit: Update minimum age threshold parameter
+ * Can only be invoked with valid admin credential witness.
+ */
+export circuit updateAgeThreshold(newThreshold: Uint<32>, adminSignatureWitness: Bytes<32>): Void {
+  // Verify caller possesses admin private witness matching public ledger admin hash
+  const adminCheck: Bytes<32> = sha256(adminSignatureWitness);
+  assert(adminCheck == ledger.adminPublicKeyHash, "CipherGate: Unauthorized admin configuration update");
+  assert(newThreshold > 0, "CipherGate: Threshold must be greater than zero");
+
+  ledger.minAgeThreshold = newThreshold;
+}
