@@ -1,0 +1,34 @@
+{
+  "contractName": "CipherGateContract",
+  "compilerVersion": "0.6.1-compact",
+  "circuits": {
+    "proveEligibility": {
+      "inputs": [
+        { "name": "contextNonce", "type": "Bytes<32>", "visibility": "public" }
+      ],
+      "witnesses": [
+        { "name": "userAge", "type": "Uint<32>", "visibility": "private" },
+        { "name": "secretSalt", "type": "Bytes<32>", "visibility": "private" },
+        { "name": "identitySecret", "type": "Bytes<32>", "visibility": "private" }
+      ],
+      "constraints": [
+        "userAge >= ledger.minAgeThreshold",
+        "computeNullifier(identitySecret, secretSalt, contextNonce) != ledger.nullifierRoot"
+      ],
+      "output": { "type": "Boolean", "visibility": "public" }
+    },
+    "updateAgeThreshold": {
+      "inputs": [
+        { "name": "newThreshold", "type": "Uint<32>", "visibility": "public" },
+        { "name": "adminSignatureWitness", "type": "Bytes<32>", "visibility": "private" }
+      ],
+      "output": { "type": "Void" }
+    }
+  },
+  "ledger": {
+    "minAgeThreshold": "Uint<32>",
+    "verifiedEligibleCount": "Uint<64>",
+    "adminPublicKeyHash": "Bytes<32>",
+    "nullifierRoot": "Bytes<32>"
+  }
+}
