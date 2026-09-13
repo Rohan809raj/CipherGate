@@ -1,0 +1,10 @@
+{
+  "contractName": "CipherGateContract",
+  "network": "Midnight Preprod",
+  "contractAddress": "0x7f8a9b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4",
+  "minAgeThreshold": 18,
+  "adminPublicKeyHash": "34914fa6713838dcfe04a11f2a36b328148b375b4db863cbb982d6194bcf9db7",
+  "deployedAt": "2026-09-13T12:30:00.000Z",
+  "blockHeight": 184592,
+  "explorerUrl": "https://preprod.midnightexplorer.com/contracts/0x7f8a9b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4"
+}
