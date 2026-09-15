@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply min-h-screen bg-[#060811] text-slate-100 font-sans;
+  }
+}
+
+/* Custom Scrollbar for Encrypted Vault Aesthetics */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0F1E;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E294B;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2E3D6B;
+}
+
+/* Glassmorphism Vault Panel Utility */
+.vault-panel {
+  background: rgba(11, 15, 30, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.vault-panel-glow {
+  background: rgba(16, 23, 45, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  box-shadow: 0 0 30px -10px rgba(6, 182, 212, 0.2);
+}
+
+.light .vault-panel {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
