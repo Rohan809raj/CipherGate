@@ -17,6 +17,7 @@
 - **Category:** Age / Eligibility Gate (Private Attribute Verification)
 - **Developer Profile:** [https://github.com/Rohan809raj](https://github.com/Rohan809raj)
 - **Repository:** [https://github.com/Rohan809raj/CipherGate](https://github.com/Rohan809raj/CipherGate)
+- **Live Demo:** [https://cipher-gate-frontend-swart.vercel.app/](https://cipher-gate-frontend-swart.vercel.app/)
 
 ---
 
@@ -189,7 +190,7 @@ npm test
 https://github.com/user-attachments/assets/ciphergate-demo.mp4
 
 > 🎥 **Walkthrough Video:** [ciphergate-demo.mp4](ciphergate-demo.mp4) (Interactive age gate, local witness generation, and on-chain verification)
-- **Live Demo URL:** [https://cipher-gate-frontend.vercel.app](https://cipher-gate-frontend.vercel.app) *(Deployment Link)*
+- **Live Demo URL:** [https://cipher-gate-frontend-swart.vercel.app/](https://cipher-gate-frontend-swart.vercel.app/) *(Deployed on Vercel)*
 
 ---
 
