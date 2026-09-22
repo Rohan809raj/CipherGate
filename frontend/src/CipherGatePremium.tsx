@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Shield, Sparkles, Check, ArrowRight, Lock, Unlock, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { useMidnightWallet } from './hooks/useMidnightWallet';
 import { WalletModal } from './components/WalletModal';
+import { PrivacyExplainer } from './components/PrivacyExplainer';
+import { PublicStateViewer } from './components/PublicStateViewer';
 import { CipherGateContractClient, VerificationProofResult } from '@contract';
 
 const contractClient = new CipherGateContractClient(18);
@@ -10,6 +12,7 @@ const contractClient = new CipherGateContractClient(18);
 export default function CipherGatePremium() {
   const { wallet, connectWallet, disconnectWallet } = useMidnightWallet();
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
+  const [isExplainerOpen, setIsExplainerOpen] = useState(false);
   const [age, setAge] = useState<number>(21);
   const [isProving, setIsProving] = useState(false);
   const [proofResult, setProofResult] = useState<VerificationProofResult | null>(null);
@@ -52,6 +55,14 @@ export default function CipherGatePremium() {
         </div>
 
         <div className="flex items-center gap-4">
+          <button
+            onClick={() => setIsExplainerOpen(true)}
+            className="text-xs text-white/70 hover:text-white transition flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.06] border border-white/10"
+          >
+            <Shield size={13} className="text-violet-400" />
+            <span>Privacy Explainer</span>
+          </button>
+
           <button
             onClick={() => setActiveTab(activeTab === 'app' ? 'how-it-works' : 'app')}
             className="text-xs text-white/50 hover:text-white transition hidden sm:inline"
@@ -313,6 +324,9 @@ export default function CipherGatePremium() {
                   </div>
                 </motion.div>
               )}
+
+              {/* Live Public State Viewer */}
+              <PublicStateViewer minAgeThreshold={18} />
             </div>
           </section>
         </>
@@ -322,6 +336,12 @@ export default function CipherGatePremium() {
       <footer className="border-t border-white/[0.06] py-8 text-center text-xs text-white/40">
         <p>CipherGate • Midnight Compact Zero-Knowledge Protocol • Level 3 Submission</p>
       </footer>
+
+      {/* Privacy Explainer Modal */}
+      <PrivacyExplainer
+        isOpen={isExplainerOpen}
+        onClose={() => setIsExplainerOpen(false)}
+      />
 
       {/* Wallet Modal */}
       <WalletModal
