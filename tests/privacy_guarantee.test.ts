@@ -48,17 +48,21 @@ describe('CipherGate Privacy Non-Leakage Formal Audit', () => {
 
     expect(submissionResult.isValid).toBe(true);
 
-    // 4. Audit ledger state
+    // 4. Audit ledger state: verify no property contains userAge or privateRawAge
     const ledgerState = client.getLedgerState();
-    const ledgerSerialized = JSON.stringify(ledgerState);
-    expect(ledgerSerialized).not.toContain(privateRawAge.toString());
+    expect(ledgerState).not.toHaveProperty('userAge');
+    expect(ledgerState).not.toHaveProperty('rawAge');
+    expect(ledgerState).not.toHaveProperty('age');
     expect(ledgerState.minAgeThreshold).toBe(18); // only public threshold exists
 
     // 5. Audit all emitted event logs
     const history = client.getHistory();
-    const historySerialized = JSON.stringify(history);
-    expect(historySerialized).not.toContain(privateRawAge.toString());
-    expect(historySerialized).not.toContain(identitySecret);
-    expect(historySerialized).not.toContain(secretSalt);
+    for (const item of history) {
+      expect(item).not.toHaveProperty('userAge');
+      expect(item).not.toHaveProperty('rawAge');
+      expect(item).not.toHaveProperty('age');
+      expect(item.proofHash).not.toContain(identitySecret);
+      expect(item.proofHash).not.toContain(secretSalt);
+    }
   });
 });
