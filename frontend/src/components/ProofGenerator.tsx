@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Sparkles, Cpu, Check, AlertCircle, ArrowRight, RefreshCw, KeyRound } from 'lucide-react';
-import { VerificationProofResult } from '../../contract/circuit';
+import { VerificationProofResult } from '@contract';
 
 interface ProofGeneratorProps {
   onGenerateProof: (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Activity, Radio, Clock, ShieldCheck, CheckCircle2 } from 'lucide-react';
-import { VerificationHistoryItem } from '../../contract/index';
+import { VerificationHistoryItem } from '@contract';
 
 interface LedgerEventStreamProps {
   history: VerificationHistoryItem[];

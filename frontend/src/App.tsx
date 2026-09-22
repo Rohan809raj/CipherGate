@@ -21,7 +21,7 @@ import { VaultGateVisual } from './components/VaultGateVisual';
 import { PrivacyInspector } from './components/PrivacyInspector';
 import { VerifierPortal } from './components/VerifierPortal';
 import { LedgerEventStream } from './components/LedgerEventStream';
-import { CipherGateContractClient, VerificationProofResult } from '../contract/index';
+import { CipherGateContractClient, VerificationProofResult } from '@contract';
 
 const contractClient = new CipherGateContractClient(18);
 

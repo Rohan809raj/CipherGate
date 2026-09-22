@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Award, CheckCircle2, Copy, Check, ExternalLink, ShieldCheck } from 'lucide-react';
-import { CipherGateLedgerState } from '../../contract/index';
+import { CipherGateLedgerState } from '@contract';
 
 interface VerifierPortalProps {
   ledgerState: CipherGateLedgerState;
