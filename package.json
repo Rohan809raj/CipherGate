@@ -10,6 +10,7 @@
     "build:contract": "npm run --prefix contract build",
     "compact:contract": "npm run --prefix contract compact",
     "build:frontend": "npm run --prefix frontend build",
+    "dev": "npm run dev:frontend",
     "dev:frontend": "npm run --prefix frontend dev",
     "deploy:local": "ts-node scripts/deploy-local.ts",
     "build": "npm run build:contract && npm run build:frontend"

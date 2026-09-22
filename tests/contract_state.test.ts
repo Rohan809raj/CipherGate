@@ -9,7 +9,7 @@ describe('CipherGate Smart Contract Client & State Transitions', () => {
     expect(state.minAgeThreshold).toBe(18);
     expect(state.verifiedEligibleCount).toBeGreaterThanOrEqual(0);
     expect(state.network).toBe('Midnight Preprod');
-    expect(state.contractAddress.startsWith('0x')).toBe(true);
+    expect(state.contractAddress.length).toBe(64);
   });
 
   it('correctly increments verifiedEligibleCount when valid proof is submitted', async () => {

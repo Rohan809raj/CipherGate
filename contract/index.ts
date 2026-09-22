@@ -12,6 +12,7 @@ import {
   evaluateAgeEligibilityCircuit,
   computeSha256,
 } from './circuit';
+import { Contract as CompiledCipherGateContract } from './src/managed/ciphergate/contract/index.js';
 
 export interface CipherGateLedgerState {
   minAgeThreshold: number;
@@ -36,14 +37,18 @@ export interface VerificationHistoryItem {
 export class CipherGateContractClient {
   private ledgerState: CipherGateLedgerState;
   private history: VerificationHistoryItem[] = [];
+  private compiledContract: CompiledCipherGateContract;
 
   constructor(initialThreshold: number = 18) {
+    this.compiledContract = new CompiledCipherGateContract();
+    this.compiledContract.ledger.minAgeThreshold = initialThreshold;
+
     this.ledgerState = {
       minAgeThreshold: initialThreshold,
-      verifiedEligibleCount: 142, // active count on Midnight Preprod
-      adminPublicKeyHash: computeSha256('admin_ciphergate_auth_key'),
-      nullifierRoot: '0'.repeat(64),
-      contractAddress: '0x7f8a9b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4',
+      verifiedEligibleCount: Number(this.compiledContract.ledger.verifiedEligibleCount),
+      adminPublicKeyHash: this.compiledContract.ledger.adminPublicKeyHash,
+      nullifierRoot: this.compiledContract.ledger.nullifierRoot,
+      contractAddress: '7f8a9b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4',
       network: 'Midnight Preprod',
     };
   }
@@ -83,11 +88,18 @@ export class CipherGateContractClient {
     const proofResult = evaluateAgeEligibilityCircuit(witness, context);
 
     if (proofResult.isValid) {
-      // 2. State transition on Midnight ledger
-      this.ledgerState.verifiedEligibleCount += 1;
+      // 2. Execute on compiled Compact contract binding
+      this.compiledContract.proveEligibility(contextNonce, {
+        userAge: witness.userAge,
+        secretSalt: witness.secretSalt,
+        identitySecret: witness.identitySecret,
+      });
+
+      // 3. Sync state transition on Midnight ledger
+      this.ledgerState.verifiedEligibleCount = Number(this.compiledContract.ledger.verifiedEligibleCount);
       this.ledgerState.nullifierRoot = proofResult.nullifierHash;
 
-      // 3. Record on-chain event (Zero age data leakage)
+      // 4. Record on-chain event (Zero age data leakage)
       const txHash = `0x${computeSha256(proofResult.proofHash + Date.now()).substring(0, 40)}`;
       this.history.unshift({
         id: `cg_evt_${Date.now()}`,

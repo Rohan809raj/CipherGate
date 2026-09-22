@@ -20,6 +20,7 @@ import { ProofGenerator } from './components/ProofGenerator';
 import { VaultGateVisual } from './components/VaultGateVisual';
 import { PrivacyInspector } from './components/PrivacyInspector';
 import { VerifierPortal } from './components/VerifierPortal';
+import { LedgerEventStream } from './components/LedgerEventStream';
 import { CipherGateContractClient, VerificationProofResult } from '../contract/index';
 
 const contractClient = new CipherGateContractClient(18);
@@ -286,6 +287,8 @@ export function App() {
                   </div>
                 </div>
               </div>
+
+              <LedgerEventStream history={contractClient.getHistory()} />
 
               <div className="p-6 rounded-3xl bg-indigo-950/20 border border-indigo-500/30 space-y-3 text-xs text-slate-300">
                 <h5 className="font-bold text-indigo-300 font-space text-sm">Selective Disclosure Rule</h5>
