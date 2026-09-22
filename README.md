@@ -187,9 +187,13 @@ npm test
 
 ## 9. Demo Video & Screen Recording
 
-https://github.com/user-attachments/assets/ciphergate-demo.mp4
+https://github.com/Rohan809raj/CipherGate/raw/main/ciphergate-demo.mp4
 
-> 🎥 **Walkthrough Video:** [ciphergate-demo.mp4](ciphergate-demo.mp4) (Interactive age gate, local witness generation, and on-chain verification)
+<video src="https://github.com/Rohan809raj/CipherGate/raw/main/ciphergate-demo.mp4" controls="controls" muted="muted" style="max-width: 100%; border-radius: 12px;">
+  Your browser does not support the video tag. Watch directly: <a href="ciphergate-demo.mp4">ciphergate-demo.mp4</a>
+</video>
+
+> 🎥 **Direct Video File:** [ciphergate-demo.mp4](ciphergate-demo.mp4) (Interactive age gate, local witness generation, and on-chain verification)
 - **Live Demo URL:** [https://cipher-gate-frontend-swart.vercel.app/](https://cipher-gate-frontend-swart.vercel.app/) *(Deployed on Vercel)*
 
 ---
