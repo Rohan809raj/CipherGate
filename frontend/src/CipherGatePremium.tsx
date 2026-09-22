@@ -5,6 +5,7 @@ import { useMidnightWallet } from './hooks/useMidnightWallet';
 import { WalletModal } from './components/WalletModal';
 import { PrivacyExplainer } from './components/PrivacyExplainer';
 import { PublicStateViewer } from './components/PublicStateViewer';
+import { SealedCard } from './components/SealedCard';
 import { CipherGateContractClient, VerificationProofResult } from '@contract';
 
 const contractClient = new CipherGateContractClient(18);
@@ -323,6 +324,17 @@ export default function CipherGatePremium() {
                     </span>
                   </div>
                 </motion.div>
+              )}
+
+              {/* Holographic Sealed Proof Card */}
+              {proofResult && proofResult.isValid && (
+                <div className="mt-4">
+                  <SealedCard
+                    proofId={proofResult.proofHash}
+                    nullifier={proofResult.nullifierHash}
+                    threshold={18}
+                  />
+                </div>
               )}
 
               {/* Live Public State Viewer */}
