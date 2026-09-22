@@ -3,7 +3,7 @@
 [![CipherGate CI](https://github.com/Rohan809raj/CipherGate/actions/workflows/ci.yml/badge.svg)](https://github.com/Rohan809raj/CipherGate/actions/workflows/ci.yml)
 ![Midnight Compact](https://img.shields.io/badge/Midnight-Compact_v0.6-06B6D4?style=flat&logo=midnight)
 ![License](https://img.shields.io/badge/License-MIT-10B981?style=flat)
-![Tests Passed](https://img.shields.io/badge/Tests-17%2F17_Passing-brightgreen?style=flat)
+![Tests Passed](https://img.shields.io/badge/Tests-25%2F25_Passing-brightgreen?style=flat)
 ![Live Demo](https://img.shields.io/badge/Demo-Vercel_Live-8A2BE2?style=flat&logo=vercel)
 
 > **"Prove you qualify. Reveal nothing."**  
@@ -173,9 +173,9 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 8. Running Tests (17/17 Passing)
+## 8. Running Tests (25/25 Passing)
 
-Execute the full automated test suite covering Compact circuit constraints, smart contract state transitions, nullifier collision resistance, benchmark latency, and formal privacy non-leakage audits:
+Execute the full automated test suite covering Compact circuit constraints, smart contract state transitions, nullifier collision resistance, benchmark latency, Poseidon SNARK hashing, and formal privacy non-leakage audits:
 
 ```bash
 npm test
@@ -194,31 +194,45 @@ npm test
   - ✅ Successfully records verified proofs and increments public counter
   - ✅ Allows admin to update eligibility threshold with valid authority
   - ✅ Rejects unauthorized attempts to modify threshold parameter
+- [`tests/contract_edge_cases.test.ts`](tests/contract_edge_cases.test.ts):
+  - ✅ Verifies senior ages (e.g., 100 years old) satisfy threshold without integer overflow
+  - ✅ Rejects when required threshold is greater than prover age
+  - ✅ Rejects proof verification if proof threshold is lower than verifier requirement
 - [`tests/nullifier_collision.test.ts`](tests/nullifier_collision.test.ts):
   - ✅ Generates distinct nullifiers for distinct users with identical age
   - ✅ Generates distinct nullifiers across different sessions for same user
   - ✅ Produces 64-character hexadecimal unforgeable nullifier hashes
+- [`tests/poseidon.test.ts`](tests/poseidon.test.ts):
+  - ✅ Generates deterministic algebraic commitments for identical inputs
+  - ✅ Produces avalanche effect on single-bit input alteration
+  - ✅ Computes valid BN254 Poseidon age commitment for witness blinding
 - [`tests/benchmark.test.ts`](tests/benchmark.test.ts):
   - ✅ Synthesizes zero-knowledge witness proof in under 20 milliseconds
   - ✅ Verifies proof state in under 5 milliseconds (< 50ms UX target)
 - [`tests/credential.test.ts`](tests/credential.test.ts):
   - ✅ Transforms W3C verifiable credentials into Compact witness without leaking PII
   - ✅ Rejects credentials failing chronological age threshold
+- [`tests/sealed_card.test.ts`](tests/sealed_card.test.ts):
+  - ✅ Formats sealed card proof token with prefix `zkp_`
+  - ✅ Validates nullifier format as 64-character hex string
 - [`tests/frontend_integration.test.ts`](tests/frontend_integration.test.ts):
   - ✅ Generates distinct cryptographic nullifiers for multiple independent callers
 
 ```text
- ✓ tests/nullifier_collision.test.ts  (3 tests)
- ✓ tests/benchmark.test.ts            (2 tests)
- ✓ tests/credential.test.ts           (2 tests)
- ✓ tests/privacy_guarantee.test.ts     (1 test)
+ ✓ tests/circuit_eligibility.test.ts  (4 tests)
+ ✓ tests/contract_edge_cases.test.ts  (3 tests)
  ✓ tests/frontend_integration.test.ts  (1 test)
  ✓ tests/contract_state.test.ts       (4 tests)
- ✓ tests/circuit_eligibility.test.ts  (4 tests)
+ ✓ tests/credential.test.ts           (2 tests)
+ ✓ tests/nullifier_collision.test.ts  (3 tests)
+ ✓ tests/privacy_guarantee.test.ts     (1 test)
+ ✓ tests/sealed_card.test.ts          (2 tests)
+ ✓ tests/poseidon.test.ts             (3 tests)
+ ✓ tests/benchmark.test.ts            (2 tests)
 
- Test Files  7 passed (7)
-      Tests  17 passed (17)
-   Duration  1.44s
+ Test Files  10 passed (10)
+      Tests  25 passed (25)
+   Duration  3.53s
 ```
 
 ---
