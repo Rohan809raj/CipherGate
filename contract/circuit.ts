@@ -125,3 +125,52 @@ export function evaluateAgeEligibilityCircuit(
       : undefined,
   };
 }
+
+export interface EligibilityProof {
+  proofId: string;
+  nullifier: string;
+  threshold: number;
+  isValid: boolean;
+  timestamp: number;
+}
+
+/**
+ * High-level witness proof generator
+ */
+export function generateEligibilityProof(
+  age: number,
+  threshold: number,
+  identitySecret: string,
+  secretSalt: string,
+  contextNonce: string
+): EligibilityProof {
+  if (age < threshold) {
+    throw new Error('CipherGate: Age does not meet the minimum eligibility threshold');
+  }
+  const nullifier = computeNullifier(identitySecret, secretSalt, contextNonce);
+  const proofId = `zkp_${computeSha256(nullifier + threshold + contextNonce).substring(0, 32)}`;
+  return {
+    proofId,
+    nullifier,
+    threshold,
+    isValid: true,
+    timestamp: Date.now()
+  };
+}
+
+/**
+ * High-level verifier logic against spent nullifier accumulator
+ */
+export function verifyEligibilityProof(
+  proof: EligibilityProof,
+  expectedThreshold: number,
+  spentNullifiers: Set<string>
+): { verified: boolean; reason?: string } {
+  if (!proof.isValid || proof.threshold < expectedThreshold) {
+    return { verified: false, reason: 'Proof threshold does not satisfy requirement' };
+  }
+  if (spentNullifiers.has(proof.nullifier)) {
+    return { verified: false, reason: 'Nullifier already spent' };
+  }
+  return { verified: true };
+}
