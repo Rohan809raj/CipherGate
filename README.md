@@ -20,6 +20,16 @@
 
 ---
 
+## Contract Address (Preprod)
+
+> **Network:** Midnight Preprod  
+> **Contract ID:** `7f8a9b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4`  
+> **Contract Name:** `CipherGateContract`  
+> **Compiler Version:** `Compact v0.6.1`  
+> **Deployment Status:** `Verified On-Chain (Active)`
+
+---
+
 ## 1. Problem Statement
 
 In traditional Web3 and digital identity systems, verifying age or regulatory eligibility (such as KYC thresholds, token purchase restrictions, or adult content access) forces users into a dangerous trade-off:
