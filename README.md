@@ -3,7 +3,7 @@
 [![CipherGate CI](https://github.com/Rohan809raj/CipherGate/actions/workflows/ci.yml/badge.svg)](https://github.com/Rohan809raj/CipherGate/actions/workflows/ci.yml)
 ![Midnight Compact](https://img.shields.io/badge/Midnight-Compact_v0.6-06B6D4?style=flat&logo=midnight)
 ![License](https://img.shields.io/badge/License-MIT-10B981?style=flat)
-![Tests Passed](https://img.shields.io/badge/Tests-10%2F10_Passing-brightgreen?style=flat)
+![Tests Passed](https://img.shields.io/badge/Tests-17%2F17_Passing-brightgreen?style=flat)
 ![Live Demo](https://img.shields.io/badge/Demo-Vercel_Live-8A2BE2?style=flat&logo=vercel)
 
 > **"Prove you qualify. Reveal nothing."**  
@@ -173,39 +173,52 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 8. Running Tests (10/10 Passing)
+## 8. Running Tests (17/17 Passing)
 
-Execute the full automated test suite covering Compact circuit constraints, smart contract state transitions, and formal privacy non-leakage audits:
+Execute the full automated test suite covering Compact circuit constraints, smart contract state transitions, nullifier collision resistance, benchmark latency, and formal privacy non-leakage audits:
 
 ```bash
 npm test
 ```
 
-### Test Suite Structure:
+### Verified Test Suites:
 - [`tests/circuit_eligibility.test.ts`](tests/circuit_eligibility.test.ts):
   - ✅ Tests age $\ge$ 18 succeeds without revealing raw age
   - ✅ Exact boundary condition check ($18 == 18$) succeeds
   - ✅ Underage prover ($16 < 18$) strictly rejected
   - ✅ Spent nullifier replay attacks rejected
 - [`tests/privacy_guarantee.test.ts`](tests/privacy_guarantee.test.ts):
-  - ✅ Formally asserts that `userAge` and `secretSalt` NEVER appear in serialized proof outputs, public ledger state, or transaction events.
+  - ✅ Formally asserts that `userAge` and `secretSalt` NEVER appear in serialized proof outputs, public ledger state, or transaction events (0-byte leakage guarantee).
 - [`tests/contract_state.test.ts`](tests/contract_state.test.ts):
   - ✅ Initializes with correct public parameters (threshold: 18, count: 0)
   - ✅ Successfully records verified proofs and increments public counter
   - ✅ Allows admin to update eligibility threshold with valid authority
   - ✅ Rejects unauthorized attempts to modify threshold parameter
+- [`tests/nullifier_collision.test.ts`](tests/nullifier_collision.test.ts):
+  - ✅ Generates distinct nullifiers for distinct users with identical age
+  - ✅ Generates distinct nullifiers across different sessions for same user
+  - ✅ Produces 64-character hexadecimal unforgeable nullifier hashes
+- [`tests/benchmark.test.ts`](tests/benchmark.test.ts):
+  - ✅ Synthesizes zero-knowledge witness proof in under 20 milliseconds
+  - ✅ Verifies proof state in under 5 milliseconds (< 50ms UX target)
+- [`tests/credential.test.ts`](tests/credential.test.ts):
+  - ✅ Transforms W3C verifiable credentials into Compact witness without leaking PII
+  - ✅ Rejects credentials failing chronological age threshold
 - [`tests/frontend_integration.test.ts`](tests/frontend_integration.test.ts):
   - ✅ Generates distinct cryptographic nullifiers for multiple independent callers
 
 ```text
- ✓ tests/circuit_eligibility.test.ts (4)
- ✓ tests/privacy_guarantee.test.ts (1)
- ✓ tests/contract_state.test.ts (4)
- ✓ tests/frontend_integration.test.ts (1)
+ ✓ tests/nullifier_collision.test.ts  (3 tests)
+ ✓ tests/benchmark.test.ts            (2 tests)
+ ✓ tests/credential.test.ts           (2 tests)
+ ✓ tests/privacy_guarantee.test.ts     (1 test)
+ ✓ tests/frontend_integration.test.ts  (1 test)
+ ✓ tests/contract_state.test.ts       (4 tests)
+ ✓ tests/circuit_eligibility.test.ts  (4 tests)
 
- Test Files  4 passed (4)
-      Tests  10 passed (10)
-   Duration  418ms
+ Test Files  7 passed (7)
+      Tests  17 passed (17)
+   Duration  1.44s
 ```
 
 ---
