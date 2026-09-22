@@ -130,6 +130,18 @@ The complete product proposal document is published in [PROPOSAL.md](PROPOSAL.md
 
 ---
 
+## 📚 Technical & Cryptographic Documentation
+
+In-depth technical architecture and cryptographic audit specifications:
+
+- 🏛️ **[Technical Architecture Guide](docs/ARCHITECTURE.md):** Dual-ledger state synchronization, witness isolation, and circuit constraint topology.
+- 🛡️ **[Formal Privacy Model & Audit](docs/PRIVACY_AUDIT.md):** Mathematical threat models, zero-knowledge inequality theorems, and data leakage matrix.
+- 🔌 **[Verifier Integration Guide](docs/VERIFIER_INTEGRATION_GUIDE.md):** Integration instructions for external Midnight smart contracts and dApps.
+- 📑 **[Contract & Circuit API Reference](docs/API.md):** Complete TypeScript types, circuit parameters, and client interface specifications.
+- 🔒 **[Artifact Integrity Hashes](checksums.sha256):** Deterministic SHA-256 verification manifest for all circuits and contracts.
+
+---
+
 ## 6. Tech Stack
 
 - **Smart Contract Language:** Midnight Compact (`module CipherGateContract`, v0.6+)
