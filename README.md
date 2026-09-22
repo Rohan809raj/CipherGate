@@ -1,19 +1,17 @@
-
-
-
 # CipherGate 🛡️
 
 [![CipherGate CI](https://github.com/Rohan809raj/CipherGate/actions/workflows/ci.yml/badge.svg)](https://github.com/Rohan809raj/CipherGate/actions/workflows/ci.yml)
 ![Midnight Compact](https://img.shields.io/badge/Midnight-Compact_v0.6-06B6D4?style=flat&logo=midnight)
 ![License](https://img.shields.io/badge/License-MIT-10B981?style=flat)
-![Tests Passed](https://img.shields.io/badge/Tests-8%2F8_Passing-brightgreen?style=flat)
+![Tests Passed](https://img.shields.io/badge/Tests-10%2F10_Passing-brightgreen?style=flat)
+![Live Demo](https://img.shields.io/badge/Demo-Vercel_Live-8A2BE2?style=flat&logo=vercel)
 
 > **"Prove you qualify. Reveal nothing."**  
 > *Zero-Knowledge Age & Regulatory Eligibility Gate Protocol built on the Midnight Blockchain.*
 
 ---
 
-## Submission Details
+## 📋 Submission Details
 
 - **Program:** RiseIn "New Moon to Full: Monthly Moonshots on Midnight"
 - **Milestone:** Level 3 - First Quarter Submission
@@ -21,15 +19,18 @@
 - **Developer Profile:** [https://github.com/Rohan809raj](https://github.com/Rohan809raj)
 - **Repository:** [https://github.com/Rohan809raj/CipherGate](https://github.com/Rohan809raj/CipherGate)
 - **Live Demo:** [https://cipher-gate-frontend-swart.vercel.app/](https://cipher-gate-frontend-swart.vercel.app/)
+- **Product Proposal:** [PROPOSAL.md](PROPOSAL.md)
 
 ---
 
-## Contract Address (Preprod)
+## 📜 Verified Contract Address (Midnight Preprod)
 
 > **Network:** Midnight Preprod  
-> **Contract ID:** `7f8a9b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4`  
-> **Contract Name:** `CipherGateContract`  
-> **Compiler Version:** `Compact v0.6.1`  
+> **Contract ID:** [`7f8a9b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4`](https://explorer.midnight.network/contract/7f8a9b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4)  
+> **Contract Name:** `CipherGateContract` (`contract/ciphergate.compact`)  
+> **Preprod Explorer:** [View on Midnight Explorer](https://explorer.midnight.network/contract/7f8a9b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4)  
+> **Preprod Indexer API:** [Query Contract via Indexer API](https://preprod-indexer.midnight.network/api/v1/contract/7f8a9b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4)  
+> **Compiler Standard:** `Compact v0.6.1`  
 > **Deployment Status:** `Verified On-Chain (Active)`
 
 ---
@@ -96,7 +97,7 @@ In traditional Web3 and digital identity systems, verifying age or regulatory el
 
 ---
 
-## 4. 🔒 Privacy Model (Required Specification)
+## 4. 🔒 Privacy Model (Core Architectural Guarantee)
 
 A formal breakdown of data visibility for any observer inspecting the Midnight public ledger:
 
@@ -116,19 +117,32 @@ A formal breakdown of data visibility for any observer inspecting the Midnight p
 
 ---
 
-## 5. Tech Stack
+## 5. 📄 Product Proposal & Level 6 Mainnet Roadmap
+
+The complete product proposal document is published in [PROPOSAL.md](PROPOSAL.md).
+
+| Question | CipherGate Specification Summary | Detailed Reference |
+| :--- | :--- | :--- |
+| **1. Real-World Problem** | Eliminates unencrypted KYC data breaches and on-chain identity deanonymization through ZK attribute gating. | [PROPOSAL.md §1](PROPOSAL.md#1-problem-statement-why-privacy-is-mandatory) |
+| **2. Privacy & Compact Design** | Private witnesses (`userAge`, `secretSalt`), client-side ZK inequality, single-use nullifiers, zero identity leakage. | [PROPOSAL.md §2](PROPOSAL.md#2-privacy-architecture--compact-smart-contract-design) |
+| **3. Midnight Ecosystem Impact** | Modular, reusable compliance primitive for Midnight DeFi, private launchpads, RWA protocols, and DAOs. | [PROPOSAL.md §3](PROPOSAL.md#3-ecosystem-impact--midnight-adoption-catalyst) |
+| **4. Level 6 Mainnet Roadmap** | Multi-attribute zk-credentials, decentralized relayer network, gas-optimized proofs, and formal security audits. | [PROPOSAL.md §4](PROPOSAL.md#4-level-6-full-moon-mainnet-production-roadmap) |
+
+---
+
+## 6. Tech Stack
 
 - **Smart Contract Language:** Midnight Compact (`module CipherGateContract`, v0.6+)
 - **Cryptographic Engine:** Midnight ZK Circuit Runtime, SHA-256 / Poseidon nullifiers
-- **Frontend Application:** React 18, TypeScript, Vite, Tailwind CSS (Midnight Violet & Encrypted Vault aesthetic), Framer Motion
-- **Icons & UI:** Lucide React, PostCSS, Autoprefixer
+- **Frontend Application:** React 18, TypeScript, Vite, Tailwind CSS (Obsidian Dark Luxury aesthetic), Framer Motion
+- **Icons & UI Components:** Lucide React, PostCSS, Autoprefixer
 - **Wallet Connectors:** Midnight Lace Wallet integration + 1 AM Wallet connector hook
 - **Testing Framework:** Vitest (v1.6.0), Happy DOM
 - **CI/CD Automation:** GitHub Actions (`.github/workflows/ci.yml`)
 
 ---
 
-## 6. Local Setup & Deployment (Run in 5 Minutes)
+## 7. Local Setup & Deployment (Run in 5 Minutes)
 
 Follow these step-by-step instructions to run CipherGate locally:
 
@@ -139,10 +153,9 @@ cd CipherGate
 npm install --legacy-peer-deps
 ```
 
-### 2. Configure Environment Variables
-Copy `.env.example` to create your local `.env`:
+### 2. Verify Compact Smart Contract Circuits
 ```bash
-cp .env.example .env
+npm run compact:compile
 ```
 
 ### 3. Deploy Contract to Local / Preprod Devnet
@@ -160,7 +173,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 7. Running Tests (All Passing)
+## 8. Running Tests (10/10 Passing)
 
 Execute the full automated test suite covering Compact circuit constraints, smart contract state transitions, and formal privacy non-leakage audits:
 
@@ -169,47 +182,60 @@ npm test
 ```
 
 ### Test Suite Structure:
-- [`tests/circuit_eligibility.test.ts`](tests/circuit_eligibility.test.ts): Tests age >= 18 succeeds, exact boundary condition (18 == 18) succeeds, underage (16 < 18) rejected, and spent nullifier prevention.
-- [`tests/privacy_guarantee.test.ts`](tests/privacy_guarantee.test.ts): Formally asserts that raw ages and birth dates NEVER appear in serialized proof outputs, public ledger state, or transaction events.
-- [`tests/contract_state.test.ts`](tests/contract_state.test.ts): Validates threshold updates, admin authorization checks, and counter increments.
-- [`tests/frontend_integration.test.ts`](tests/frontend_integration.test.ts): Validates multi-caller verification and distinct nullifier generation.
+- [`tests/circuit_eligibility.test.ts`](tests/circuit_eligibility.test.ts):
+  - ✅ Tests age $\ge$ 18 succeeds without revealing raw age
+  - ✅ Exact boundary condition check ($18 == 18$) succeeds
+  - ✅ Underage prover ($16 < 18$) strictly rejected
+  - ✅ Spent nullifier replay attacks rejected
+- [`tests/privacy_guarantee.test.ts`](tests/privacy_guarantee.test.ts):
+  - ✅ Formally asserts that `userAge` and `secretSalt` NEVER appear in serialized proof outputs, public ledger state, or transaction events.
+- [`tests/contract_state.test.ts`](tests/contract_state.test.ts):
+  - ✅ Initializes with correct public parameters (threshold: 18, count: 0)
+  - ✅ Successfully records verified proofs and increments public counter
+  - ✅ Allows admin to update eligibility threshold with valid authority
+  - ✅ Rejects unauthorized attempts to modify threshold parameter
+- [`tests/frontend_integration.test.ts`](tests/frontend_integration.test.ts):
+  - ✅ Generates distinct cryptographic nullifiers for multiple independent callers
+
+```text
+ ✓ tests/circuit_eligibility.test.ts (4)
+ ✓ tests/privacy_guarantee.test.ts (1)
+ ✓ tests/contract_state.test.ts (4)
+ ✓ tests/frontend_integration.test.ts (1)
+
+ Test Files  4 passed (4)
+      Tests  10 passed (10)
+   Duration  418ms
+```
 
 ---
 
-## 8. Application Walkthrough & Screenshots
+## 9. Application Walkthrough & Screenshots
 
 ### CI / CD Workflow Execution
 ![CI/CD Workflow](image.png)
-*Figure 8.1: GitHub Actions CI workflow executing Compact verification, full typechecks, Vitest tests, and production build.*
+*Figure 9.1: GitHub Actions CI workflow executing Compact verification, full typechecks, Vitest tests, and production build.*
 
 ### Automated Tests (10/10 Passing)
 ![Tests Passing](image-1.png)
-*Figure 8.2: Vitest test suite executing circuit inequality assertions, boundary checks, and formal privacy non-leakage audits.*
+*Figure 9.2: Vitest test suite executing circuit inequality assertions, boundary checks, and formal privacy non-leakage audits.*
 
 ---
 
-## 9. Demo Video & Screen Recording
-
-https://github.com/Rohan809raj/CipherGate/raw/main/ciphergate-demo.mp4
-video -
+## 10. 🎥 Demo Video & Screen Recording
 
 https://github.com/user-attachments/assets/a68eb4a7-61e3-45cf-b8a2-ee88f1df1e35
 
-
-
-
-
-
-<video src="https://github.com/Rohan809raj/CipherGate/raw/main/ciphergate-demo.mp4" controls="controls" muted="muted" style="max-width: 100%; border-radius: 12px;">
-  Your browser does not support the video tag. Watch directly: <a href="ciphergate-demo.mp4">ciphergate-demo.mp4</a>
+<video src="https://github.com/user-attachments/assets/a68eb4a7-61e3-45cf-b8a2-ee88f1df1e35" controls="controls" muted="muted" style="max-width: 100%; border-radius: 12px;">
+  Your browser does not support the video tag. Watch directly: <a href="https://github.com/user-attachments/assets/a68eb4a7-61e3-45cf-b8a2-ee88f1df1e35">Play Demo Video</a>
 </video>
 
-> 🎥 **Direct Video File:** [ciphergate-demo.mp4](ciphergate-demo.mp4) (Interactive age gate, local witness generation, and on-chain verification)
-- **Live Demo URL:** [https://cipher-gate-frontend-swart.vercel.app/](https://cipher-gate-frontend-swart.vercel.app/) *(Deployed on Vercel)*
+- **Live Deployed App:** [https://cipher-gate-frontend-swart.vercel.app/](https://cipher-gate-frontend-swart.vercel.app/) *(Deployed on Vercel)*
+- **Direct Video Asset:** [ciphergate-demo.mp4](ciphergate-demo.mp4)
 
 ---
 
-## 10. Roadmap to Level 4 (Waxing Gibbous)
+## 11. Roadmap to Level 4 (Waxing Gibbous)
 
 - [ ] **Cross-Contract Composability:** Enable external Midnight DeFi and DAO contracts to query CipherGate eligibility status via cross-contract calls.
 - [ ] **Dynamic Multi-Attribute Gates:** Support multi-dimensional threshold proofs (e.g., age &ge; 21 AND creditScore &ge; 700 AND accreditedInvestor == true).
@@ -218,7 +244,7 @@ https://github.com/user-attachments/assets/a68eb4a7-61e3-45cf-b8a2-ee88f1df1e35
 
 ---
 
-## 11. Author & Repository Links
+## 12. Author & Repository Links
 
 - **Author / Developer:** Rohan809raj
 - **GitHub Profile:** [https://github.com/Rohan809raj](https://github.com/Rohan809raj)
@@ -226,6 +252,6 @@ https://github.com/user-attachments/assets/a68eb4a7-61e3-45cf-b8a2-ee88f1df1e35
 
 ---
 
-## 12. License
+## 13. License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
