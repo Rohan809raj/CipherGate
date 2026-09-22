@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Database, Shield, CheckCircle2, Lock } from 'lucide-react';
+import { Database, Shield, CheckCircle2, Lock } from 'lucide-react';
 
 interface PublicStateViewerProps {
   verifiedCount?: number;
@@ -10,9 +10,6 @@ export const PublicStateViewer: React.FC<PublicStateViewerProps> = ({
   verifiedCount = 1429,
   minAgeThreshold = 18
 }) => {
-  const contractAddress = '7f8a9b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4';
-  const explorerUrl = `https://explorer.midnight.network/contract/${contractAddress}`;
-
   return (
     <div className="w-full max-w-4xl mx-auto mt-6 bg-neutral-900/60 border border-neutral-800/80 rounded-2xl p-5 backdrop-blur-sm">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 mb-4 border-b border-neutral-800 gap-3">
@@ -23,15 +20,10 @@ export const PublicStateViewer: React.FC<PublicStateViewerProps> = ({
             Live Synchronized
           </span>
         </div>
-        <a
-          href={explorerUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs text-neutral-400 hover:text-violet-300 flex items-center space-x-1 transition font-mono"
-        >
-          <span>Contract: 0x7f8a...3c4</span>
-          <ExternalLink className="w-3.5 h-3.5" />
-        </a>
+        <div className="flex items-center space-x-2 text-xs text-neutral-400 font-mono bg-neutral-950/80 px-3 py-1.5 rounded-lg border border-neutral-800">
+          <span className="text-neutral-500">Contract:</span>
+          <span className="text-violet-300">0x7f8a...3c4</span>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">

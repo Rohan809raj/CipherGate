@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Copy, Check, ExternalLink, Lock } from 'lucide-react';
+import { Shield, Copy, Check, Lock } from 'lucide-react';
 
 interface SealedCardProps {
   proofId?: string;
@@ -81,18 +81,10 @@ export const SealedCard: React.FC<SealedCardProps> = ({
         </div>
       </div>
 
-      {/* Card Footer Actions */}
+      {/* Card Footer Status */}
       <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs">
         <span className="text-[11px] text-neutral-500 font-mono">Status: Immutable On-Chain</span>
-        <a
-          href={`https://explorer.midnight.network/contract/${nullifier.slice(0, 64)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-violet-400 hover:text-violet-300 flex items-center space-x-1 text-[11px] font-medium transition"
-        >
-          <span>Explorer</span>
-          <ExternalLink className="w-3 h-3" />
-        </a>
+        <span className="text-violet-400 text-[11px] font-medium font-mono">Midnight Preprod Verified</span>
       </div>
     </div>
   );

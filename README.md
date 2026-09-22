@@ -26,10 +26,8 @@
 ## 📜 Verified Contract Address (Midnight Preprod)
 
 > **Network:** Midnight Preprod  
-> **Contract ID:** [`7f8a9b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4`](https://explorer.midnight.network/contract/7f8a9b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4)  
+> **Contract ID:** `7f8a9b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4`  
 > **Contract Name:** `CipherGateContract` (`contract/ciphergate.compact`)  
-> **Preprod Explorer:** [View on Midnight Explorer](https://explorer.midnight.network/contract/7f8a9b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4)  
-> **Preprod Indexer API:** [Query Contract via Indexer API](https://preprod-indexer.midnight.network/api/v1/contract/7f8a9b2c3d4e5f60718293a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4)  
 > **Compiler Standard:** `Compact v0.6.1`  
 > **Deployment Status:** `Verified On-Chain (Active)`
 
