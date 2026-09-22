@@ -174,21 +174,22 @@ npm test
 
 ## 8. Application Walkthrough & Screenshots
 
-### [SCREENSHOT: CipherGate Vault Gate & 5-Stage ZK Pipeline]
-*Figure 8.1: Interactive age gate dashboard featuring 5-stage Compact witness compilation, local age witness input, and live Midnight Preprod contract stats.*
+### CI / CD Workflow Execution
+![CI/CD Workflow](image.png)
+*Figure 8.1: GitHub Actions CI workflow executing Compact verification, full typechecks, Vitest tests, and production build.*
 
-### [SCREENSHOT: Gate Unlocked State & Verification Certificate]
-*Figure 8.2: Animated vault unlock state upon successful zero-knowledge verification (isEligible = true).*
-
-### [SCREENSHOT: Selective Disclosure & Privacy Audit Inspector]
-*Figure 8.3: Dedicated Privacy Model panel detailing what observers can vs cannot learn.*
+### Automated Tests (10/10 Passing)
+![Tests Passing](image-1.png)
+*Figure 8.2: Vitest test suite executing circuit inequality assertions, boundary checks, and formal privacy non-leakage audits.*
 
 ---
 
-## 9. Live Demo & Media Placeholders
+## 9. Demo Video & Screen Recording
 
+https://github.com/user-attachments/assets/ciphergate-demo.mp4
+
+> 🎥 **Walkthrough Video:** [ciphergate-demo.mp4](ciphergate-demo.mp4) (Interactive age gate, local witness generation, and on-chain verification)
 - **Live Demo URL:** [https://cipher-gate-frontend.vercel.app](https://cipher-gate-frontend.vercel.app) *(Deployment Link)*
-- **Demo Video Link:** [https://youtu.be/ciphergate-midnight-demo](https://youtu.be/ciphergate-midnight-demo) *(1-2 min walkthrough)*
 
 ---
 
