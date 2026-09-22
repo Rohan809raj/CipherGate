@@ -8,6 +8,7 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "build:contract": "npm run --prefix contract build",
+    "compact:compile": "node scripts/compile-compact.js",
     "compact:contract": "npm run --prefix contract compact",
     "build:frontend": "npm run --prefix frontend build",
     "dev": "npm run dev:frontend",
